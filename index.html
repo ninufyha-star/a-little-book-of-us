@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Book of Us ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Patrick+Hand&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #d9c6a5;
+    color: #514033;
+    font-family: 'Patrick Hand', cursive;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.cover {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    background:
+        radial-gradient(circle, #f7ead2 0%, #d9c6a5 100%);
+}
+
+.cover-card {
+    max-width: 650px;
+    width: 100%;
+    background: #fff8e9;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 12px 35px #59442d55;
+    transform: rotate(-1deg);
+    border: 1px solid #e4d4b9;
+}
+
+.cover-card img {
+    width: 100%;
+    max-height: 380px;
+    object-fit: cover;
+    border: 9px solid white;
+    box-shadow: 0 4px 12px #0002;
+}
+
+.cover-card h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 6vw, 48px);
+    margin: 20px 0 5px;
+    color: #76513e;
+}
+
+.cover-card p {
+    font-family: 'Caveat', cursive;
+    font-size: 27px;
+    margin: 8px;
+}
+
+.open-button {
+    background: #9b6d56;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 13px 28px;
+    font-size: 19px;
+    margin: 15px;
+    transition: .3s;
+}
+
+.open-button:hover {
+    background: #704b39;
+    transform: scale(1.05);
+}
+
+/* DIARY */
+
+#diary {
+    display: none;
+    min-height: 100vh;
+    padding: 35px 15px 100px;
+    background:
+        radial-gradient(circle, #e8d8bd, #c7ae8c);
+}
+
+.diary-heading {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    color: #76513e;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.page {
+    display: none;
+    max-width: 850px;
+    min-height: 650px;
+    margin: auto;
+    padding: 35px;
+    background:
+        repeating-linear-gradient(
+            #fffaf0,
+            #fffaf0 31px,
+            #eadfcf 32px
+        );
+    border: 1px solid #d8c5a9;
+    box-shadow: 0 12px 35px #513b2650;
+    position: relative;
+    transform-origin: left center;
+}
+
+.page.active {
+    display: block;
+    animation: turnNext .55s ease;
+}
+
+.page.go-back {
+    animation: turnPrevious .55s ease;
+}
+
+@keyframes turnNext {
+    from {
+        opacity: 0;
+        transform: perspective(1200px) rotateY(-12deg);
+    }
+    to {
+        opacity: 1;
+        transform: perspective(1200px) rotateY(0);
+    }
+}
+
+@keyframes turnPrevious {
+    from {
+        opacity: 0;
+        transform: perspective(1200px) rotateY(12deg);
+    }
+    to {
+        opacity: 1;
+        transform: perspective(1200px) rotateY(0);
+    }
+}
+
+.page h2 {
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 42px;
+    color: #8d5c46;
+    margin: 0 0 12px;
+}
+
+.page .intro {
+    text-align: center;
+    font-size: 20px;
+    margin: 0 auto 25px;
+    max-width: 650px;
+    line-height: 1.5;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 25px;
+    align-items: start;
+    margin: 25px auto;
+}
+
+.photo {
+    background: white;
+    padding: 10px 10px 25px;
+    box-shadow: 0 5px 12px #0002;
+    transform: rotate(-2deg);
+    transition: .3s;
+    cursor: pointer;
+}
+
+.photo:nth-child(even) {
+    transform: rotate(2deg);
+}
+
+.photo:hover {
+    transform: rotate(0deg) scale(1.04);
+    z-index: 2;
+}
+
+.photo img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.photo p {
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    margin: 8px 0 0;
+}
+
+.note {
+    background: #f4e3c6;
+    padding: 20px;
+    max-width: 650px;
+    margin: 25px auto;
+    font-size: 21px;
+    line-height: 1.6;
+    transform: rotate(-1deg);
+    box-shadow: 0 3px 10px #0001;
+}
+
+.sticker {
+    text-align: center;
+    font-size: 28px;
+    margin: 20px;
+}
+
+.navigation {
+    text-align: center;
+    margin: 30px auto;
+}
+
+.navigation button {
+    background: #92634e;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 18px;
+    margin: 5px;
+}
+
+.navigation button:hover {
+    background: #684533;
+}
+
+#pageNumber {
+    text-align: center;
+    font-size: 17px;
+    margin: 15px;
+}
+
+/* FINAL LETTER */
+
+.envelope {
+    max-width: 450px;
+    margin: 45px auto;
+    padding: 45px 20px;
+    background: #ead0a9;
+    border: 2px dashed #a77c5e;
+    text-align: center;
+    cursor: pointer;
+    font-size: 25px;
+    box-shadow: 0 5px 15px #0002;
+}
+
+.letter {
+    display: none;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 30px;
+    background: #fff5df;
+    border: 1px solid #dfc8a6;
+    font-family: 'Caveat', cursive;
+    font-size: 25px;
+    line-height: 1.6;
+    box-shadow: 0 5px 15px #0002;
+}
+
+/* MUSIC BUTTON */
+
+.music-button {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 50;
+    background: #79513e;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 19px;
+    font-size: 17px;
+    box-shadow: 0 4px 12px #0003;
+}
+
+.music-button:hover {
+    background: #563827;
+}
+
+/* PHOTO VIEWER */
+
+#photoViewer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #17120eeF;
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+#viewerImage {
+    max-width: 90%;
+    max-height: 75vh;
+    object-fit: contain;
+    border: 8px solid white;
+    box-shadow: 0 5px 25px #0008;
+}
+
+#viewerCaption {
+    color: white;
+    font-family: 'Caveat', cursive;
+    font-size: 25px;
+    margin: 12px;
+}
+
+.viewer-controls {
+    display: flex;
+    gap: 15px;
+}
+
+.viewer-controls button,
+.close-viewer {
+    background: #fff5df;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-size: 17px;
+    margin: 5px;
+}
+
+.close-viewer {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 25px;
+}
+
+@media(max-width: 600px) {
+    .page {
+        padding: 22px 15px;
+        min-height: 550px;
+    }
+
+    .page h2 {
+        font-size: 35px;
+    }
+
+    .photo-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+    }
+
+    .photo img {
+        height: 160px;
+    }
+
+    .photo p {
+        font-size: 18px;
+    }
+
+    .note {
+        font-size: 19px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND MUSIC -->
+
+<audio id="backgroundMusic" loop>
+    <source src="music/song.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-button" id="musicButton" onclick="toggleMusic()">
+    ♫ Play Music
+</button>
+
+<!-- COVER -->
+
+<section class="cover" id="cover">
+    <div class="cover-card">
+
+        <img src="photos/group1.jpg" alt="Our group">
+
+        <h1>A Little Book of Us</h1>
+
+        <p>Nidan & the gang ❤️</p>
+
+        <p>Some memories never get old...</p>
+
+        <button class="open-button" onclick="openDiary()">
+            Open Our Diary ✨
+        </button>
+
+        <div class="sticker">♡ 📸 ♡</div>
+
+    </div>
+</section>
+
+<!-- DIARY -->
+
+<main id="diary">
+
+    <div class="diary-heading">
+        A Little Book of Us ♡
+    </div>
+
+    <!-- PAGE 1 -->
+
+    <section class="page active">
+
+        <h2>Once Upon a Time...</h2>
+
+        <p class="intro">
+            Every beautiful story starts somewhere.
+            And somehow, ours became one of my favourite stories.
+        </p>
+
+        <div class="photo-grid">
+
+            <div class="photo">
+                <img src="photos/group2.jpg" alt="Memory">
+                <p>Our little world ♡</p>
+            </div>
+
+            <div class="photo">
+                <img src="photos/group3.jpg" alt="Memory">
+                <p>Good times, always</p>
+            </div>
+
+            <div class="photo">
+                <img src="photos/group4.jpg" alt="Memory">
+                <p>Moments together</p>
+            </div>
+
+        </div>
+
+        <div class="note">
+            Some people enter your life and make ordinary
+            moments feel extraordinary. That's what this
+            little collection is about. ❤️
+        </div>
+
+    </section>
+
+    <!-- PAGE 2 -->
+
+    <section class="page">
+
+        <h2>Meet the Gang</h2>
+
+        <p class="intro">
+            A little bit of chaos, a lot of laughter,
+            and memories that deserve their own book.
+        </p>
+
+        <div class="photo-grid">
+
+            <div class="photo">
+                <img src="photos/group5.jpg" alt="Friends">
+                <p>The gang ❤️</p>
+            </div>
+
+            <div class="photo">
+                <img src="photos/group6.jpg" alt="Friends">
+                <p>My favourite people</p>
+            </div>
+
+        </div>
+
+        <div class="note">
+            We may not have everything figured out,
+            but at least we have these memories.
+            And honestly, that's enough. ♡
+        </div>
+
+        <div class="sticker">🌷 ✨ 📸</div>
+
+    </section>
+
+    <!-- PAGE 3 -->
+
+    <section class="page">
+
+        <h2>The Nidan Chapter</h2>
+
+        <p class="intro">
+            Every book has that one special chapter.
+            This one is yours.
+        </p>
+
+        <div class="photo-grid">
+
+            <div class="photo">
+                <img src="photos/nidan1.jpg" alt="Nidan">
+                <p>The main character</p>
+            </div>
+
+            <div class="photo">
+                <img src="photos/nidan2.jpg" alt="Nidan">
+                <p>Just another memory</p>
+            </div>
+
+            <div class="photo">
+                <img src="photos/nidan3.jpg" alt="Nidan">
+                <p>One of a kind ♡</p>
+            </div>
+
+        </div>
+
+        <div class="note">
+            Some friendships are difficult to explain.
+            They are simply made of little conversations,
+            random moments, laughter and memories.
+        </div>
+
+    </section>
+
+    <!-- PAGE 4 -->
+
+    <section class="page">
+
+        <h2>Just Being Nidan</h2>
+
+        <p class="intro">
+            Because you deserve a page of your own.
+        </p>
+
+        <div class="photo-grid">
+
+            <div class="photo">
+                <img src="photos/nidan4.jpg" alt="Nidan">
+                <p>Simply you ♡</p>
+            </div>
+
+            <div class="photo">
+                <img src="photos/nidan5.jpg" alt="Nidan">
+                <p>A favourite memory</p>
+            </div>
+
+        </div>
+
+        <div class="note">
+            Dear Nidan,
+
+            <br><br>
+
+            I hope life gives you countless reasons to smile.
+            I hope you achieve all the things you dream about.
+            And I hope you never forget how special you are
+            to the people around you.
+
+            <br><br>
+
+            Keep being yourself. ❤️
+        </div>
+
+    </section>
+
+    <!-- PAGE 5 -->
+
+    <section class="page">
+
+        <h2>Little Moments, Big Memories</h2>
+
+        <p class="intro">
+            The little things are sometimes the biggest things.
+        </p>
+
+        <div class="photo-grid">
+
+            <div class="photo">
+                <img src="photos/memory1.jpg" alt="Memory">
+                <p>Remember this?</p>
+            </div>
+
+            <div class="photo">
+                <img src="photos/memory2.jpg" alt="Memory">
+                <p>A little moment</p>
+            </div>
+
+            <div class="photo">
+                <img src="photos/memory3.jpg" alt="Memory">
+                <p>Good old days</p>
+            </div>
+
+            <div class="photo">
+                <img src="photos/memory4.jpg" alt="Memory">
+                <p>One for the memories</p>
+            </div>
+
+            <div class="photo">
+                <img src="photos/memory5.jpg" alt="Memory">
+                <p>Forever remembered</p>
+            </div>
+
+            <div class="photo">
+                <img src="photos/memory6.jpg" alt="Memory">
+                <p>Another favourite</p>
+            </div>
+
+            <div class="photo">
+                <img src="photos/memory7.jpg" alt="Memory">
+                <p>And many more...</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- PAGE 6 -->
+
+    <section class="page">
+
+        <h2>Our Beautiful Chaos</h2>
+
+        <p class="intro">
+            Not every memory needs a perfect picture.
+            Some are special simply because they happened.
+        </p>
+
+        <div class="note">
+
+            The random conversations.
+
+            <br><br>
+
+            The unexpected laughter.
+
+            <br><br>
+
+            The silly moments.
+
+            <br><br>
+
+            The memories that make no sense to anyone else.
+
+            <br><br>
+
+            Those are the things worth keeping. ♡
+
+        </div>
+
+        <div class="sticker">
+            😂 🤍 🌷
+        </div>
+
+        <p class="intro">
+            Here's to all the memories we haven't made yet.
+        </p>
+
+    </section>
+
+    <!-- PAGE 7 -->
+
+    <section class="page">
+
+        <h2>Our Story Continues...</h2>
+
+        <p class="intro">
+            This isn't the end of our story.
+            It's just a little collection of the chapters
+            we've lived so far.
+        </p>
+
+        <div class="note">
+
+            There are still places to go,
+            stories to tell, pictures to take,
+            and countless memories waiting for us.
+
+            <br><br>
+
+            One day, we'll look back at all this
+            and smile at how far we've come.
+
+            <br><br>
+
+            Until then, let's keep making memories. ❤️
+
+        </div>
+
+        <div class="sticker">
+            ✨ More memories loading... ✨
+        </div>
+
+    </section>
+
+    <!-- PAGE 8 -->
+
+    <section class="page">
+
+        <h2>One Last Surprise</h2>
+
+        <p class="intro">
+            Before you close this little book,
+            there's one more thing for you.
+        </p>
+
+        <div class="envelope" onclick="openLetter()">
+            💌
+
+            <br>
+
+            A little letter for you
+
+            <br>
+
+            <small>Tap to open</small>
+
+        </div>
+
+        <div class="letter" id="finalLetter">
+
+            Dear Nidan,
+
+            <br><br>
+
+            I made this little book to keep some memories
+            in one place. It's not perfect, but every picture
+            and every page is a little reminder of the moments
+            we've shared.
+
+            <br><br>
+
+            I hope you always find happiness in the little
+            things, keep chasing your dreams and never stop
+            being the person you are.
+
+            <br><br>
+
+            Thank you for being part of this story.
+
+            <br><br>
+
+            Here's to friendship, memories and many more
+            beautiful chapters ahead.
+
+            <br><br>
+
+            With lots of love,
+
+            <br>
+
+            Your friend ❤️
+
+        </div>
+
+        <div class="sticker">♡ The End... or maybe just the beginning ♡</div>
+
+    </section>
+
+    <!-- NAVIGATION -->
+
+    <div id="pageNumber">Page 1 of 8</div>
+
+    <div class="navigation">
+
+        <button onclick="previousPage()">
+            ← Previous
+        </button>
+
+        <button onclick="nextPage()">
+            Next →
+        </button>
+
+    </div>
+
+</main>
+
+<!-- PHOTO VIEWER -->
+
+<div id="photoViewer">
+
+    <button class="close-viewer" onclick="closeViewer()">
+        ✕
+    </button>
+
+    <img id="viewerImage" src="" alt="Enlarged memory">
+
+    <div id="viewerCaption"></div>
+
+    <div class="viewer-controls">
+
+        <button onclick="previousPhoto()">← Previous</button>
+
+        <button onclick="nextPhoto()">Next →</button>
+
+    </div>
+
+</div>
+
+<script>
+
+/* MUSIC */
+
+const music = document.getElementById("backgroundMusic");
+const musicButton = document.getElementById("musicButton");
+
+let musicPlaying = false;
+
+function toggleMusic() {
+
+    if (musicPlaying) {
+
+        music.pause();
+
+        musicButton.innerHTML = "♫ Play Music";
+
+        musicPlaying = false;
+
+    } else {
+
+        music.play().then(() => {
+
+            musicButton.innerHTML = "♫ Pause Music";
+
+            musicPlaying = true;
+
+        }).catch(() => {
+
+            alert("Please tap Play Music again to start the song.");
+
+        });
+
+    }
+
+}
+
+/* OPEN DIARY AND START MUSIC */
+
+function openDiary() {
+
+    document.getElementById("cover").style.display = "none";
+
+    document.getElementById("diary").style.display = "block";
+
+    window.scrollTo(0, 0);
+
+    music.play().then(() => {
+
+        musicPlaying = true;
+
+        musicButton.innerHTML = "♫ Pause Music";
+
+    }).catch(() => {
+
+        musicPlaying = false;
+
+        musicButton.innerHTML = "♫ Play Music";
+
+    });
+
+}
+
+/* PAGE NAVIGATION */
+
+const pages = document.querySelectorAll(".page");
+
+let currentPage = 0;
+
+function showPage(newPage, direction) {
+
+    if (newPage < 0 || newPage >= pages.length) {
+        return;
+    }
+
+    pages[currentPage].classList.remove("active", "go-back");
+
+    currentPage = newPage;
+
+    if (direction === "back") {
+        pages[currentPage].classList.add("go-back");
+    }
+
+    pages[currentPage].classList.add("active");
+
+    document.getElementById("pageNumber").textContent =
+        "Page " + (currentPage + 1) + " of " + pages.length;
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+}
+
+function nextPage() {
+
+    showPage(currentPage + 1, "next");
+
+}
+
+function previousPage() {
+
+    showPage(currentPage - 1, "back");
+
+}
+
+/* FINAL LETTER */
+
+function openLetter() {
+
+    const letter = document.getElementById("finalLetter");
+
+    if (letter.style.display === "block") {
+
+        letter.style.display = "none";
+
+    } else {
+
+        letter.style.display = "block";
+
+    }
+
+}
+
+/* PHOTO ENLARGEMENT */
+
+let allPhotos = [];
+let photoIndex = 0;
+
+function collectPhotos() {
+
+    allPhotos = Array.from(
+        document.querySelectorAll(".photo img, .cover-card img")
+    );
+
+}
+
+collectPhotos();
+
+allPhotos.forEach((photo, index) => {
+
+    photo.style.cursor = "pointer";
+
+    photo.addEventListener("click", function() {
+
+        photoIndex = index;
+
+        showPhoto();
+
+        document.getElementById("photoViewer").style.display = "flex";
+
+    });
+
+});
+
+function showPhoto() {
+
+    const photo = allPhotos[photoIndex];
+
+    document.getElementById("viewerImage").src = photo.src;
+
+    const caption = photo.closest(".photo")
+        ? photo.closest(".photo").querySelector("p")
+        : null;
+
+    document.getElementById("viewerCaption").textContent =
+        caption ? caption.textContent : "A beautiful memory ❤️";
+
+}
+
+function nextPhoto() {
+
+    photoIndex = (photoIndex + 1) % allPhotos.length;
+
+    showPhoto();
+
+}
+
+function previousPhoto() {
+
+    photoIndex = (photoIndex - 1 + allPhotos.length) % allPhotos.length;
+
+    showPhoto();
+
+}
+
+function closeViewer() {
+
+    document.getElementById("photoViewer").style.display = "none";
+
+}
+
+/* KEYBOARD CONTROLS */
+
+document.addEventListener("keydown", function(event) {
+
+    const viewer = document.getElementById("photoViewer");
+
+    if (viewer.style.display === "flex") {
+
+        if (event.key === "ArrowRight") {
+            nextPhoto();
+        }
+
+        if (event.key === "ArrowLeft") {
+            previousPhoto();
+        }
+
+        if (event.key === "Escape") {
+            closeViewer();
+        }
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
